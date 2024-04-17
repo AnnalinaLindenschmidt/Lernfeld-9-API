@@ -36,11 +36,11 @@ paths:
                 items:
                   $ref: '#/components/schemas/TodoEntry'
         404:
-          description: Invalid list id
-          # content: {}
+          description: List id not found
+          content: {}
         500:
-          description: server problems
-          # content: {}
+          description: Invalid list id
+          content: {}
     delete:
       tags:
       - Listenverwaltung
@@ -56,13 +56,13 @@ paths:
       responses:
         200:
           description: List was deleted
-          # content: {}
+          content: {}
         404:
           description: Invalid list id
-          # content: {}
+          content: {}
         500:
-          description: server problems
-          # content: {}
+          description: Invalid list id
+          content: {}
 
   /todo-list:
     post:
@@ -95,7 +95,7 @@ paths:
   /todo-list/{list_id}/entry:
     post:
       tags:
-      - Listenverwaltung
+      - Eintragsverwaltung
       summary: Add new entry
       operationId: addEntry
       parameters:
@@ -110,7 +110,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TodoList'
+              $ref: '#/components/schemas/TodoEntry'
         required: true
       responses:
         201:
@@ -118,7 +118,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TodoList'
+                $ref: '#/components/schemas/TodoEntry'
         500:
           description: Entry could not be added
           content: {}
@@ -130,7 +130,7 @@ paths:
   /todo-list/{list_id}/entry/{entry_id}:
     patch:
       tags:
-      - Listenverwaltung
+      - Eintragsverwaltung
       summary: update entry
       operationId: updateEntry
       parameters:
@@ -153,7 +153,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TodoList'
+              $ref: '#/components/schemas/TodoEntry'
         required: true
       responses:
         200:
@@ -161,7 +161,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TodoList'
+                $ref: '#/components/schemas/TodoEntry'
         500:
           description: Entry could not update
           content: {}
@@ -172,7 +172,7 @@ paths:
 
     delete:
       tags:
-      - Listenverwaltung
+      - Eintragsverwaltung
       summary: Delete an entry
       operationId: deleteEntry
       parameters:
@@ -192,13 +192,13 @@ paths:
       responses:
         200:
           description: Entry was deleted
-          # content: {}
+          content: {}
         404:
           description: Invalid lentry id
-          # content: {}
+          content: {}
         500:
           description: server problems
-          # content: {}
+          content: {}
 
 
 
