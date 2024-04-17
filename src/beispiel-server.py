@@ -79,6 +79,18 @@ def add_new_list():
     todo_lists.append(new_list)
     return jsonify(new_list), 200
 
+# define endpoint for adding a new entry for list
+@app.route('/todo-list/<list_id>/entry', methods=['POST'])
+def add_new_entry(list_id):
+    # make JSON from POST data (even if content type is not set correctly)
+    new_entry = request.get_json(force=True)
+    print('Got new entry to be added: {}'.format(new_entry))
+    # create ids for new entries, save it and return the entries with description, id, list-id, name
+    new_entry['id'] = str(uuid.uuid4())
+    new_entry['list'] = list_id
+    todos.append(new_entry)
+    return jsonify(new_entry), 200
+
 
 # define endpoint for getting all lists
 @app.route('/todo-lists', methods=['GET'])
