@@ -41,7 +41,7 @@ todos = [
 @app.after_request
 def apply_cors_header(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = 'GET,POST,DELETE'
+    response.headers['Access-Control-Allow-Methods'] = 'GET,POST,DELETE,PATCH'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
     return response
 
@@ -91,6 +91,27 @@ def add_new_entry(list_id):
     todos.append(new_entry)
     return jsonify(new_entry), 200
 
+# define endpoint for updating entry in list
+@app.route('/todo-list/<list_id>/entry/<entry_id>', methods=['PATCH'])
+def update_entry(list_id, entry_id):
+    entry_item = None
+    # find todo list entry depending on given entry id
+    for entry in todos:
+        if entry['id'] == entry_id:    
+            if entry['list'] == list_id:
+                entry_item = entry
+                break
+    # if json is invalid, return status code 406
+    if not entry_item:
+        abort(406)
+    update_entry = request.get_json(force=True)
+    # entry id and list need to stay the same
+    update_entry['id'] = entry_item['id']
+    update_entry['list'] = entry_item['list']
+     # remove old entry and add updated entry
+    todos.remove(entry_item)
+    todos.append(update_entry)
+    return jsonify(update_entry), 201
 
 # define endpoint for getting all lists
 @app.route('/todo-lists', methods=['GET'])
