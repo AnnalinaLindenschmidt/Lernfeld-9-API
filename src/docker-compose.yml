@@ -1,0 +1,16 @@
+# Für das Deployment der Web-App mit Docker wurden die dafür notwendigen Dateien als Vorlage zur Verfügung gestellt, 
+# die entsprechend der Todo-Listenverwaltung hätte angepasst werden sollen. 
+# Aber aus zeitlichen Gründen konnte dies nicht mehr erfolgen.
+
+services:
+  verandb:
+    build: https://github.com/wichmann/veranstaltungsdatenbank.git
+    image: verandb
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - verandb_data:/app
+
+volumes:
+  verandb_data:
