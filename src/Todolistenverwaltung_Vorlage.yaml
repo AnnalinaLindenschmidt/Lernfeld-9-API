@@ -3,7 +3,7 @@ info:
   title: Todo-Listen-Verwaltung
   description: ""
   contact:
-    email: wichmann@bbs-os-brinkstr.de
+    email: ann.linde@web.de
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -36,10 +36,10 @@ paths:
                 items:
                   $ref: '#/components/schemas/TodoEntry'
         404:
-          description: List id not found
+          description: Invalid list id
           content: {}
         500:
-          description: Invalid list id
+          description: server problems
           content: {}
     delete:
       tags:
@@ -61,7 +61,7 @@ paths:
           description: Invalid list id
           content: {}
         500:
-          description: Invalid list id
+          description: server problems
           content: {}
 
   /todo-list:
@@ -85,7 +85,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TodoList'
         500:
-          description: List could not be added
+          description: server problems
           content: {}
         406:
           description: JSON is not valid
@@ -120,7 +120,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TodoEntry'
         500:
-          description: Entry could not be added
+          description: server problems
           content: {}
         406:
           description: JSON is not valid
@@ -163,7 +163,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TodoEntry'
         500:
-          description: Entry could not update
+          description: server problems
           content: {}
         406:
           description: JSON is not valid
@@ -194,7 +194,7 @@ paths:
           description: Entry was deleted
           content: {}
         404:
-          description: Invalid lentry id
+          description: Invalid entry id
           content: {}
         500:
           description: server problems
